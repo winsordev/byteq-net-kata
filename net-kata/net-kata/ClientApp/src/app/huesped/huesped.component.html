@@ -1,0 +1,104 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Listado de Huespedes</strong>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificación</th>
+                        <th>Huesped</th>
+                        <th>Email</th>
+                        <th *ngIf="ActiveSelect"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of Huespedes">
+                        <td>{{item.identificacion}}</td>
+                        <td style="text-align: left;">{{item.nombre + ' ' + item.apellido}}</td>
+                        <td style="text-align: left;">{{item.email}}</td>
+                        <td *ngIf="ActiveSelect">
+                            <button class="btn btn-outline-secondary" *ngIf="ActiveSelect" (click)="SelecionarHuesped(item)">Escoger</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-outline-primary" (click)="OpenPopup()">Añadir Nuevo</button>
+    </div>
+</div>
+<hr>
+
+<div class="popup" id="crearhuespedpopup">
+
+    <div class="pop-content" style="width: 30%;">
+        <div class="modal-header">
+            <a style="color: white" href="javascript:void(0)" (click)="Close()">Close</a>
+        </div>
+        <div class="modal-body">
+            <div style="overflow: auto; width: 100%">
+
+                <div class="card">
+                    <div class="card-header card-informacion wrapper">
+                        <strong>Crear Huesped</strong>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="HuespedForm">
+                            <div class="container wrapper">
+                                <div>
+                                    <label for="inputIdentificacion"
+                                        class="col-form-label col-form-label-title">Identificación:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputIdentificacion"
+                                        formControlName="Identificacion" mask="0000000000" />
+                                </div>
+
+                                <div>
+                                    <label for="inputNombre" class="col-form-label col-form-label-title">Nombre:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputNombre" formControlName="Nombre" />
+                                </div>
+
+                                <div>
+                                    <label for="inputApellido"
+                                        class="col-form-label col-form-label-title">Apellido:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputApellido"
+                                        formControlName="Apellido" />
+                                </div>
+
+                                <div>
+                                    <label for="inputEmail" class="col-form-label col-form-label-title">Email:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputEmail" formControlName="Email" />
+                                </div>
+
+                                <div>
+                                    <label for="inputTelefono"
+                                        class="col-form-label col-form-label-title">Telefono:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputTelefono"
+                                        formControlName="Telefono" mask="(000) 000-0000" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" (click)="Guardar()">Guardar</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>

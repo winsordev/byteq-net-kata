@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Habitaciones</strong>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Piso / Numero</th>
+                        <th>Disponible</th>
+                        <th *ngIf="ActiveSelect"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of Habitaciones">
+                        <td>{{item.descripcion}}</td>
+                        <td style="text-align: left;">{{item.piso + ' / ' + item.numero}}</td>
+                        <td style="text-align: left;">
+                            <div class="form-group form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" disabled
+                                    [(ngModel)]="item.disponible">
+                            </div>
+                        </td>
+                        <td *ngIf="ActiveSelect"><button class="btn btn-outline-secondary" *ngIf="ActiveSelect" (click)="SelecionarHabitacion(item)">Escoger</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-outline-primary" (click)="OpenPopup()">Añadir Nuevo</button>
+    </div>
+</div>
+<hr>
+<div class="popup" id="crearhabitacionespopup">
+
+    <div class="pop-content" style="width: 30%;">
+        <div class="modal-header">
+            <a style="color: white" href="javascript:void(0)" (click)="Close()">Close</a>
+        </div>
+        <div class="modal-body">
+            <div style="overflow: auto; width: 100%">
+                <div class="card">
+                    <div class="card-header card-informacion wrapper">
+                        <strong>Crear Habitacion</strong>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="HabitacionForm">
+                            <div class="container wrapper">
+                                <div style="display: none;">
+                                    <label for="inputHabitacionId"
+                                        class="col-form-label col-form-label-title">Id:</label>
+                                </div>
+                                <div style="display: none;">
+                                    <input type="text" class="form-control" id="inputHabitacionId"
+                                        formControlName="HabitacionId" />
+                                </div>
+
+                                <div>
+                                    <label for="inputDescripcion"
+                                        class="col-form-label col-form-label-title">Descripcion:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputDescripcion"
+                                        formControlName="Descripcion" />
+                                </div>
+
+                                <div>
+                                    <label for="inputPiso" class="col-form-label col-form-label-title">Piso:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputPiso" formControlName="Piso" mask="00" />
+                                </div>
+
+                                <div>
+                                    <label for="inputNumero" class="col-form-label col-form-label-title">Numero:</label>
+                                </div>
+                                <div>
+                                    <input type="text" class="form-control" id="inputNumero" formControlName="Numero" mask="0000" />
+                                </div>
+
+                                <div>
+                                    <label for="inputDisponible"
+                                        class="col-form-label col-form-label-title">Disponible:</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" class="form-check-input" id="inputDisponible"
+                                        formControlName="Disponible" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-outline-primary" (click)="Guardar()">Guardar</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class="modal-footer">
+        </div>
+    </div>
+</div>
